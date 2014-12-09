@@ -10,20 +10,22 @@
  */
 function roles_access_node_access($node, $op, $account) {
 	// use anonymous user for testing
-	$nodes = array(216, 217);
-	$restricted_node = in_array($node->nid, $nodes);
+	if (isset($node->nid)) {
+		$nodes = array(216, 217);
+		$restricted_node = in_array($node->nid, $nodes);
 
-	global $user;
-	$allowed_user = array_intersect(
-		array('Administrator', 'Redakteur'),
-		array_values($user->roles));
+		global $user;
+		$allowed_user = array_intersect(
+			array('Administrator', 'Redakteur'),
+			array_values($user->roles));
 
-	if ($restricted_node && !$allowed_user) {
-		return NODE_ACCESS_DENY;
+		if ($restricted_node && !$allowed_user) {
+			return NODE_ACCESS_DENY;
+		}
+		else {
+			return NODE_ACCESS_ALLOW;
+		}
+		
+		return NODE_ACCESS_IGNORE;
 	}
-	else {
-		return NODE_ACCESS_ALLOW;
-	}
-
-	return NODE_ACCESS_IGNORE;
 }
