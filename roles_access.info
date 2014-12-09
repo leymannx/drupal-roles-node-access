@@ -1,0 +1,4 @@
+name = Roles Access
+description = Restrict node access based on user roles
+package = Custom
+core = 7.x
