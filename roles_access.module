@@ -9,6 +9,7 @@
  * Implements hook_node_access().
  */
 function roles_access_node_access($node, $op, $account) {
+	// use anonymous user for testing
 	$nodes = array(216, 217);
 	$restricted_node = in_array($node->nid, $nodes);
 
